@@ -35,7 +35,7 @@ class Qubit:
     def __str__(self) -> str:
         return f"{self.alpha}|0⟩ + {self.beta}|1⟩"
 
-    def __array__(self) -> np.typing.NDArray[np.complex192]:
+    def __array__(self) -> np.typing.NDArray[np.complex256]:
         return np.c_[[self.alpha, self.beta]]
     
     def observe(self) -> bool:
