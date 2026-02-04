@@ -1,0 +1,25 @@
+[project]
+name = "quantsim-gui"
+version = "0.1.0"
+description = "A Graphical User Interface for Quantsim"
+authors = [
+    {name = "Joyal V Poulose"},
+    {name = "Karn Yogish"},
+    {name = "Kevin K Tom"},
+    {name = "Leana Shaji"},
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "pyside6 (>=6.10.1,<7.0.0)",
+    "quantsim @ file:///home/stealthninja/Public/Projects/python/quantum/quantsim/quantsim",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool]
+[tool.pyside6-project]
+files = ["app.py", "windows/*.py", "windows/widgets/*.py"]
