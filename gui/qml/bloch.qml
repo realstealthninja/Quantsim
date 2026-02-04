@@ -51,5 +51,11 @@ View3D {
                 diffuseColor: "black"
             }
         }
+
+        Model {
+            source: "#Cone"
+            scale: Qt.vector3d(0.25, 0.15, 0.25)
+            
+        }
     }
 }
