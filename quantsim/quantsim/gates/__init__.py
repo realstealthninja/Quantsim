@@ -4,3 +4,4 @@ from .paulix import PauliX
 from .pauliy import PauliY
 from .pauliz import PauliZ
 from .sgate import SGate
+from .inverses import InverseS
