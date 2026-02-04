@@ -1,0 +1,10 @@
+# Ignore macos files
+.DS_Store
+**/.DS_Store
+
+# ignore ide specifics
+.vscode
+**/.vscode
+
+# ignore venv
+.venv/
