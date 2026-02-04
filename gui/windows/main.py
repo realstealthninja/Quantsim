@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QDockWidget, QMainWindow, QToolBar, QToolBox
 
 from .widgets.blochsphere import BlochSphere
 
-from .widgets import Editor
+from .widgets.editor  import Editor 
 
 
 class MainWindow(QMainWindow):
@@ -37,6 +37,11 @@ class MainWindow(QMainWindow):
 
 
     def add_dockables(self):
+        """
+        adds dockable widgets to the main window
+        
+        :param self: Description
+        """
         toolboxdock = QDockWidget("Tool box")
         blochsphere = QDockWidget("Bloch Sphere")
         self.toolbox: QToolBox  = QToolBox()
