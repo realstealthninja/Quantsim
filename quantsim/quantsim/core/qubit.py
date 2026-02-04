@@ -9,18 +9,26 @@ from typing_extensions import override
 class Qubit:
     observed: bool | None = None
 
-    def __init__(self) -> None: 
-        state: list[float] = [random() for _ in range(0, 4)]
-        s = sum(state)
-        state = list(map(lambda i: i / s, state))
-        
-        a = sqrt(state[0])
-        b = sqrt(state[1])
-        c = sqrt(state[2])
-        d = sqrt(state[3])
+    def __init__(self, alpha: complex | None = None, beta: complex | None = None, matrix: np.matrix | None = None) -> None: 
+        if matrix is not None:
+            self.alpha = matrix[0][0][0]
+            self.beta = matrix[1][0][0]
+        elif alpha and beta:
+            self.alpha = alpha
+            self.beta = beta
+        else:
 
-        self.alpha: complex = complex(a, b)
-        self.beta: complex = complex(c, d)
+            state: list[float] = [random() for _ in range(0, 4)]
+            s = sum(state)
+            state = list(map(lambda i: i / s, state))
+
+            a = sqrt(state[0])
+            b = sqrt(state[1])
+            c = sqrt(state[2])
+            d = sqrt(state[3])
+
+            self.alpha: complex = complex(a, b)
+            self.beta: complex = complex(c, d)
 
 
     @override
