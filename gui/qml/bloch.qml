@@ -10,6 +10,7 @@ View3D {
     id: blochview
     anchors.fill: parent
     camera: cameraNode
+    objectName: "View3D"
 
     property int theta: 45
     property int phi: 45
