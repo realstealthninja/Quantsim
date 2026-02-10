@@ -18,14 +18,14 @@ class Qubit:
             self.beta = beta
         else:
 
-            state: list[float] = [random() for _ in range(0, 4)]
+            state: list[float] = [random() * 2 -1 for _ in range(0, 4)]
             s = sum(state)
             state = list(map(lambda i: i / s, state))
 
-            a = sqrt(state[0])
-            b = sqrt(state[1])
-            c = sqrt(state[2])
-            d = sqrt(state[3])
+            a = state[0]
+            b = state[1]
+            c = state[2]
+            d = state[3]
 
             self.alpha: complex = complex(a, b)
             self.beta: complex = complex(c, d)
