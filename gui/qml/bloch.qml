@@ -3,24 +3,25 @@ import QtQuick3D.AssetUtils
 import QtQuick3D.Helpers
 import QtQuick3D.Particles3D
 import QtQuick3D.Xr
-import QtQuick 2.15
+import QtQuick
+import QtQuick3D.Helpers
 
 View3D {
     id: blochview
     anchors.fill: parent
+    camera: cameraNode
+
+    property int theta: 45
+    property int phi: 45
 
     environment: SceneEnvironment {
         clearColor: "#112220"
     }
 
-    property real yRotation: 0
-
     Node {
-        id: scene
-        eulerRotation.y: blochview.yRotation
-
+        id: originNode
         PerspectiveCamera {
-            id: camera
+            id: cameraNode
             z: 300
         }
 
@@ -28,9 +29,13 @@ View3D {
             z: 400
             brightness: 100
         }
-
+    }
+    
+    Node {
         Model {
             source: "#Sphere"
+            scale: Qt.vector3d(2, 2, 2)
+            opacity: 0.5
 
             materials: DefaultMaterial {
                 diffuseColor: "black"
@@ -38,24 +43,55 @@ View3D {
             }
         }
 
+
+        Text {
+            font.family: "Noto Sans Mono"
+            text: "|0⟩"
+            y: -125
+        }
+
+        Text {
+
+            font.family: "Noto Sans Mono"
+            text: "|1⟩"
+            y: 100
+        }
+    }
+
+    Node {
+
+        eulerRotation: Qt.vector3d(blochview.phi, blochview.theta, 0)
+        
         Model {
 
             source: "#Cylinder"
-
-            scale: Qt.vector3d(0.15, 0.5, 0.15)
-
-            position: Qt.vector3d(0, 1, 0)
-            rotation: Qt.vector3d(1, 0, 1)
-
+            scale: Qt.vector3d(0.225, 0.75, 0.225)
+            
+            position.y: 40
             materials: DefaultMaterial {
                 diffuseColor: "black"
+                opacity: 0.8
+            }
+
+            Model {
+                source: "#Cone"
+                scale: Qt.vector3d(1.25, 0.5, 1.25)
+                position.y: 50
+                materials: DefaultMaterial {
+                    diffuseColor: "black"
+                    opacity: 0.8
+                }
             }
         }
+    }
 
-        Model {
-            source: "#Cone"
-            scale: Qt.vector3d(0.25, 0.15, 0.25)
-            
-        }
+    AxisHelper {
+        enableAxisLines: false
+        enableXYGrid: true
+    }
+
+    OrbitCameraController {
+        origin: originNode
+        camera: cameraNode
     }
 }
