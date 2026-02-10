@@ -1,5 +1,4 @@
-from math import atan
-from PySide6 import QtCore
+from math import atan2, degrees
 from PySide6.QtCore import QUrl
 from PySide6.QtQuickWidgets import QQuickWidget
 
@@ -10,12 +9,12 @@ class BlochSphere(QQuickWidget):
         super().__init__()
         self.setSource(QUrl("qml/bloch.qml"))
 
-        self.view3d = self.findChild(QtCore.QObject, "View3D")
+        self.set_qubit(Qubit())
     
 
 
     def set_qubit(self, qubit: Qubit) :
-
-        if self.view3d:
-            self.view3d.setProperty("theta", atan(qubit.alpha.imag / qubit.alpha.real))
-            self.view3d.setProperty("psi", atan(qubit.beta.imag / qubit.beta.real))
+        theta = degrees(atan2(qubit.alpha.imag, qubit.alpha.real))
+        phi = degrees(atan2(qubit.beta.imag, qubit.beta.real))
+        self.rootObject().setProperty("theta", phi)
+        self.rootObject().setProperty("phi", theta)
