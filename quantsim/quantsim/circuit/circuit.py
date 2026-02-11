@@ -1,8 +1,8 @@
-from numpy import matrix
-from quantsim.circuit.observer import Observer
-from quantsim.circuit.qubit import QubitComponent
-from quantsim.quantsim.circuit.gate import GateComponent
-from quantsim.quantsim.core.qubit import Qubit
+from numpy import isin, matrix
+from .observer import Observer
+from .qubit import QubitComponent
+from .gate import GateComponent
+from  ..core.qubit import Qubit
 from .component import Component
 
 class Circuit:
@@ -13,7 +13,12 @@ class Circuit:
     components: list[Component] = []
 
     def add(self, component: Component):
-        self.components.append(component)
+        if isinstance(component, QubitComponent):
+            self.qubits.append(component)
+        elif isinstance(component, Observer):
+            self.observers.append(component)
+        else:
+            self.components.append(component)
 
     def clear(self): 
         self.qubits.clear()
@@ -43,12 +48,14 @@ class Circuit:
         
             # reverse direction
             gates = gates[::-1]
+            print(gates)
             endmat: matrix = gates.pop().gate.__array__()
             for gate in gates:
                 endmat *= gate
             
-            qubit_mat= endmat * qubit.qubit 
+            qubit_mat= endmat * qubit.qubit.__array__()
             qubit = Qubit(alpha=qubit_mat[0][0], beta=qubit_mat[1][0])
+            print(qubit)
             if observer:
                 observer.value = qubit.observe()
             
