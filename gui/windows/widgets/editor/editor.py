@@ -1,15 +1,18 @@
 from enum import Enum
+from math import isclose
+from turtle import position
 from typing import override
 
 from PySide6.QtCore import QPoint, QPointF, QRect
 from PySide6.QtGui import QKeyEvent, QPainterPath, Qt
 from PySide6.QtWidgets import (
     QGraphicsItem,
-    QGraphicsPixmapItem,
     QGraphicsScene,
     QGraphicsSceneMouseEvent,
     QGraphicsView,
 )
+
+from .caditem import CADItem
 from .qubit import QubitCADItem
 
 class Tools(Enum):
@@ -18,12 +21,14 @@ class Tools(Enum):
 
 
 class GraphicsCanvas(QGraphicsScene):
-    previous_click: QPointF = QPointF()
-    current_pos: QPointF = QPointF()
+    previous_click: QPointF
+    current_pos: QPointF
     temp_paths: list[QGraphicsItem] = []
     grid: list[int] = []
 
     wires: list[QGraphicsItem] = []
+
+    cad_items: list[CADItem] = []
     first_press: bool = True
 
 
@@ -33,20 +38,35 @@ class GraphicsCanvas(QGraphicsScene):
 
         self.setBackgroundBrush(Qt.GlobalColor.white)
         self.grid = [1200, 800]
-        self.addItem(QubitCADItem())
-    
+        self.add_caditem(QubitCADItem())    
+
+    def add_caditem(self, item: CADItem) -> None:
+        self.addItem(item)
+        self.cad_items.append(item)
     
     def set_tool(self, tool: Tools):
         self.tool = tool
     
 
-    def snap(self, postion: QPointF) -> QPointF:
+    def snap(self, pos: QPointF) -> QPointF:
         base = 100
-        _x = round(postion.x() * self.grid[0])
-        _y = round(postion.y() * self.grid[1])
+
+        for caditem in self.cad_items:
+            inputpos = caditem.input_position
+            if inputpos and isclose(inputpos.x(), pos.x()) and isclose(inputpos.y(), pos.y()):
+                return inputpos
+            outputpos = caditem.output_position
+            if outputpos and isclose(outputpos.x(), pos.x()) and isclose(outputpos.y(), pos.y()):
+                return outputpos
+            
+        _x = round(pos.x() * self.grid[0])
+        _y = round(pos.y() * self.grid[1])
         
         _x = base * round(_x / base)
         _y = base * round(_y / base)
+    
+
+        
 
         return QPointF(_x / self.grid[0], _y / self.grid[1])
 
