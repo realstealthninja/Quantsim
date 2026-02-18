@@ -1,4 +1,4 @@
-from numpy import isin, matrix
+from numpy import matrix
 from .observer import Observer
 from .qubit import QubitComponent
 from .gate import GateComponent
@@ -53,8 +53,11 @@ class Circuit:
             for gate in gates:
                 endmat *= gate
             
+            print(endmat)
+            print(qubit.qubit.__array__())
             qubit_mat= endmat * qubit.qubit.__array__()
-            qubit = Qubit(alpha=qubit_mat[0][0], beta=qubit_mat[1][0])
+            qubit_mat.flatten()
+            qubit = Qubit(alpha=qubit_mat[0][0][0], beta=qubit_mat[1][0][0])
             print(qubit)
             if observer:
                 observer.value = qubit.observe()
