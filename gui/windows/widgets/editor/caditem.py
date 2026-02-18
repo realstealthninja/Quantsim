@@ -11,5 +11,3 @@ class CADItem(QGraphicsPixmapItem):
         super().__init__(QPixmap(path).scaled(QSize(64, 64)))
         self.input_position = input_position
         self.output_position = output_postion
-
-    
