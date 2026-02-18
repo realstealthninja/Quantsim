@@ -48,25 +48,22 @@ class GraphicsCanvas(QGraphicsScene):
     
 
     def snap(self, pos: QPointF) -> QPointF:
-        base = 100
+        SNAP_DIST = 15
+        GRID = 100
 
         for caditem in self.cad_items:
-            inputpos = caditem.input_position
-            if inputpos and isclose(inputpos.x(), pos.x()) and isclose(inputpos.y(), pos.y(), rel_tol=1e-1):
+            for p in (caditem.input_position, caditem.output_position):
+                if p and (pos - p).manhattanLength() <= SNAP_DIST:
+                    return p
 
-                return inputpos
-            outputpos = caditem.output_position
-            if outputpos and isclose(outputpos.x(), pos.x()) and isclose(outputpos.y(), pos.y(), rel_tol=1e-1):
-                return outputpos
-            
-        point = pos.toPoint()
-        if point.x()  % 100 < 15:
-            point.setX(point.x() - point.x() % 100) 
-        
-        if point.y()  % 100 < 15:
-            point.setY(point.y() - point.y() % 100)
+        gx = round(pos.x() / GRID) * GRID
+        gy = round(pos.y() / GRID) * GRID
+        grid_point = QPointF(gx, gy)
 
-        return point.toPointF()
+        if (pos - grid_point).manhattanLength() <= SNAP_DIST:
+            return grid_point
+
+        return pos
 
 
     @override
