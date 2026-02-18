@@ -2,7 +2,7 @@ import numpy as np
 from numpy.random import choice
 
 from math import sqrt
-from random import random
+from random import random, choice
 from typing_extensions import override
 
 
@@ -22,10 +22,10 @@ class Qubit:
             s = sum(state)
             state = list(map(lambda i: i / s, state))
 
-            a = sqrt(state[0])
-            b = sqrt(state[1])
-            c = sqrt(state[2])
-            d = sqrt(state[3])
+            a = sqrt(state[0]) * choice([1, -1])
+            b = sqrt(state[1]) * choice([1, -1])
+            c = sqrt(state[2]) * choice([1, -1])
+            d = sqrt(state[3]) * choice([1, -1])
 
             self.alpha: complex = complex(a, b)
             self.beta: complex = complex(c, d)

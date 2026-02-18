@@ -10,16 +10,12 @@ from PySide6.QtWidgets import (
     QGraphicsSceneMouseEvent,
     QGraphicsView,
 )
-
+from .qubit import QubitCADItem
 
 class Tools(Enum):
     NONE = 0
     WIRE = 1
 
-
-class CADItem(QGraphicsPixmapItem):
-    def __init__(self):
-        super().__init__()
 
 class GraphicsCanvas(QGraphicsScene):
     previous_click: QPointF = QPointF()
@@ -37,6 +33,7 @@ class GraphicsCanvas(QGraphicsScene):
 
         self.setBackgroundBrush(Qt.GlobalColor.white)
         self.grid = [1200, 800]
+        self.addItem(QubitCADItem())
     
     
     def set_tool(self, tool: Tools):
