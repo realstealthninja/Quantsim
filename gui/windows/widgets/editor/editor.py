@@ -48,7 +48,6 @@ class GraphicsCanvas(QGraphicsScene):
     
 
     def snap(self, pos: QPointF) -> QPointF:
-        base = 100
 
         for caditem in self.cad_items:
             inputpos = caditem.input_position
