@@ -123,11 +123,8 @@ class Editor(QGraphicsView):
     """
     Custom editor widget which draws all the symbols and connections
     """
-    previous_click: QPoint | None = None
-    current_pos: QPoint = QPoint()
-    paths: list[QGraphicsItem] = []
-    wires: list[tuple[QPoint, QPoint]] = []
-
+    tool: Tools = Tools.NONE
+    cadItem: CADItem | None = None
     grid_step: int = 100
     grid_pen: QPen = QPen(Qt.GlobalColor.lightGray)
 
