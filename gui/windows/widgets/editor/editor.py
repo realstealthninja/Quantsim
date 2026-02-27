@@ -134,6 +134,26 @@ class GraphicsCanvas(QGraphicsScene):
             case Tools.NONE:
                 pass
 
+    def draw_wire(self, p1: QPointF, p2: QPointF):
+        path = QPainterPath()
+        p1 = self.snap(p1)
+        p2 = self.snap(p2)
+
+        path.moveTo(p1)
+
+        if abs(p2.x()) >= abs(p2.y()):
+            path.lineTo(QPointF(p2.x(), p1.y()))
+
+            path.moveTo(QPointF(p2.x(), p1.y()))
+            path.lineTo(QPointF(p2.x(), p2.y()))
+        else:
+            path.lineTo(QPointF(p1.x(), p2.y()))
+
+            path.moveTo(QPointF(p1.x(), p2.y()))
+            path.lineTo(QPointF(p2.x(), p2.y()))
+
+        self.wires.append(self.addPath(path))
+
     @override
     def mousePressEvent(self, event: QGraphicsSceneMouseEvent, /) -> None:
         match self.editor.tool:
@@ -143,18 +163,7 @@ class GraphicsCanvas(QGraphicsScene):
                     self.first_press = False
 
                 else:
-                    path = QPainterPath()
-                    path.moveTo(self.snap(self.previous_click))
-                    pos = self.snap(event.scenePos())
-                    if abs(pos.x()) >= abs(pos.y()):
-                        path.lineTo(QPointF(pos.x(), self.previous_click.y()))
-                        path.moveTo(QPointF(pos.x(), self.previous_click.y()))
-                        path.lineTo(QPointF(pos.x(), pos.y()))
-                    else:
-                        path.lineTo(QPointF(self.previous_click.x(), pos.y()))
-                        path.moveTo(QPointF(self.previous_click.x(), pos.y()))
-                        path.lineTo(QPointF(pos.x(), pos.y()))
-                    self.wires.append(self.addPath(path))
+                    self.draw_wire(self.previous_click, event.scenePos())
                     self.first_press = True
 
             case Tools.PLACE:
