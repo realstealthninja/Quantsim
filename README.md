@@ -1,4 +1,4 @@
-# Quantsim
+# pyquantsim
 
 A quantum circuit designer and simulation
-this is for a college project 
+this is for a college project

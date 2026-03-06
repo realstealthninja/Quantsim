@@ -1,7 +1,7 @@
 [project]
-name = "quantsim-gui"
+name = "pyquantsim-gui"
 version = "0.1.0"
-description = "A Graphical User Interface for Quantsim"
+description = "A Graphical User Interface for pyquantsim"
 authors = [
     {name = "Joyal V Poulose"},
     {name = "Karn Yogish"},
@@ -13,7 +13,7 @@ readme = "README.md"
 requires-python = ">=3.14,<3.15"
 dependencies = [
     "pyside6 (>=6.10.1,<7.0.0)",
-    "quantsim @ file:///home/stealthninja/Public/Projects/python/quantum/quantsim/quantsim",
+    "pyquantsim",
 ]
 
 [build-system]

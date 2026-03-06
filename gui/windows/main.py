@@ -12,8 +12,8 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from quantsim.core import Qubit
-from quantsim.gates import InverseS
+from pyquantsim.core import Qubit
+from pyquantsim.gates import InverseS
 
 from .widgets.editor.hadamarad import HadamaradCADItem
 from .widgets.editor.inverses import InverseSCADItem

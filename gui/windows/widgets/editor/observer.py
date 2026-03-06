@@ -1,13 +1,13 @@
 from typing import override
 from PySide6.QtCore import QPointF, Signal
-from quantsim.circuit.component import Component
-from quantsim.gates import PauliX
-from quantsim.circuit import Observer
+from pyquantsim.circuit.component import Component
+from pyquantsim.gates import PauliX
+from pyquantsim.circuit import Observer
 from .caditem import CADItem
 
 
 class ObserverCADItem(CADItem):
-    observer: Observer = Observer() 
+    observer: Observer = Observer()
     inputItems = []
 
     def __init__(self):

@@ -19,9 +19,9 @@ from PySide6.QtWidgets import (
     QGraphicsView,
     QMenu,
 )
-from quantsim.circuit.circuit import Circuit
-from quantsim.circuit.observer import Observer
-from quantsim.core import Qubit
+from pyquantsim.circuit.circuit import Circuit
+from pyquantsim.circuit.observer import Observer
+from pyquantsim.core import Qubit
 
 from .observer import ObserverCADItem
 
