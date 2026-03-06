@@ -1,8 +1,8 @@
 from typing import override
 from PySide6.QtCore import QPointF
-from quantsim.circuit.component import Component
-from quantsim.gates import PauliY
-from quantsim.circuit.gate import GateComponent
+from pyquantsim.circuit.component import Component
+from pyquantsim.gates import PauliY
+from pyquantsim.circuit.gate import GateComponent
 from .caditem import CADItem
 
 

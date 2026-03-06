@@ -2,7 +2,7 @@ from typing import override
 from PySide6.QtCore import QRectF, QSize, QPointF
 from PySide6.QtGui import QPainterPath, QPixmap
 from PySide6.QtWidgets import QGraphicsPixmapItem, QGraphicsSceneHoverEvent
-from quantsim.circuit.component import Component
+from pyquantsim.circuit.component import Component
 
 
 class CADItem(QGraphicsPixmapItem): ...

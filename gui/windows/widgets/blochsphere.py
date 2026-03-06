@@ -2,8 +2,8 @@ from math import atan2, degrees
 from PySide6.QtCore import QUrl
 from PySide6.QtQuickWidgets import QQuickWidget
 
-from quantsim.circuit import Observer
-from quantsim.core import Qubit
+from pyquantsim.circuit import Observer
+from pyquantsim.core import Qubit
 
 
 class BlochSphere(QQuickWidget):
