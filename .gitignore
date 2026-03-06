@@ -8,3 +8,6 @@
 
 # ignore venv
 .venv/
+
+# pyi
+typings/
