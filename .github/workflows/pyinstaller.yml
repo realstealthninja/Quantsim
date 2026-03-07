@@ -5,10 +5,18 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
+        path: ["gui/", 'gui\']
+        exclude:
+          - os: ubuntu-latest
+            path: 'gui\'
+          - os: macos-latest
+            path: 'gui\'
+          - os: windows-latest
+            path: "gui/"
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: gui
+        working-directory: ${{ matrix.path }}
     steps:
       - name: setup python
         uses: actions/setup-python@v5
