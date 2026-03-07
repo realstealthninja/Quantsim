@@ -22,3 +22,9 @@ jobs:
         run: |
           cd gui
           python scripts/build.py
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v7.0.0
+        with:
+          name: pyquantsim-${{ matrix.os }}
+          path: gui/dist/app/
