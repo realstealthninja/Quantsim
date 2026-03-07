@@ -19,10 +19,6 @@ jobs:
           python -m poetry --directory gui install --with dev
 
       - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
-        with:
-          python_ver: "3.14"
-          spec: "gui/app.spec"
-          requirements: ""
-          upload_exe_with_name: "pyquantsim"
-          options: --name "PyQuantSim",
+        run: |
+          cd gui
+          python scripts/build.py
