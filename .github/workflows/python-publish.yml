@@ -30,6 +30,7 @@ jobs:
         run: |
           # NOTE: put your own distribution build steps here.
           python -m pip install poetry
+          cd lib/
           python -m poetry install
           python -m poetry build
 
